@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Stablecoin Protocol | Preprod</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    :root {
+      --purple-900: #2e026d;
+      --purple-800: #3b0764;
+      --purple-700: #5b21b6;
+      --purple-600: #7c3aed;
+      --purple-500: #8b5cf6;
+      --pink-500: #ec4899;
+      --cyan-400: #22d3ee;
+      --glass: rgba(255, 255, 255, 0.08);
+      --border: rgba(255, 255, 255, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        radial-gradient(circle at top left, #8b5cf6, transparent 40%),
+        radial-gradient(circle at bottom right, #ec4899, transparent 40%),
+        linear-gradient(135deg, var(--purple-900), var(--purple-800));
+      color: #f8fafc;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+      background: linear-gradient(90deg, #a78bfa, #22d3ee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 1.2rem;
+      color: #e9d5ff;
+    }
+
+    p {
+      color: #ddd6fe;
+      font-size: 0.9rem;
+    }
+
+    .app {
+      max-width: 1000px;
+      margin: auto;
+      padding: 32px 20px 60px;
+      display: grid;
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .card.highlight {
+      border: 1px solid var(--purple-500);
+      box-shadow: 0 0 0 1px rgba(139, 92, 246, 0.4);
+    }
+
+    label {
+      display: block;
+      margin-top: 14px;
+      font-size: 0.85rem;
+      color: #c4b5fd;
+    }
+
+    input {
+      width: 100%;
+      margin-top: 6px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(0, 0, 0, 0.35);
+      color: #f8fafc;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    input::placeholder {
+      color: #a78bfa;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    button {
+      margin-top: 18px;
+      padding: 14px;
+      border-radius: 14px;
+      border: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: white;
+      background: linear-gradient(135deg, var(--purple-600), var(--pink-500));
+      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.45);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 30px rgba(236, 72, 153, 0.5);
+    }
+
+    button.secondary {
+      background: linear-gradient(135deg, #06b6d4, #22d3ee);
+    }
+
+    button.danger {
+      background: linear-gradient(135deg, #ef4444, #f97316);
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .log {
+      margin-top: 10px;
+      height: 220px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 14px;
+      padding: 14px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.8rem;
+      overflow-y: auto;
+      color: #e9d5ff;
+      border: 1px solid var(--border);
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #c7d2fe;
+      opacity: 0.8;
+    }
+
+    @media (max-width: 768px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="app">
+
+    <div>
+      <h1>💜 Stablecoin Protocol</h1>
+      <p style="text-align:center">
+        Cardano • Plutus V2 • Lace Wallet • Preprod
+      </p>
+    </div>
+
+    <!-- Wallet -->
+    <div class="card highlight">
+      <h2>Wallet</h2>
+      <p>Connect your Lace wallet on Preprod to begin.</p>
+      <button id="connect">🔌 Connect Lace Wallet</button>
+    </div>
+
+    <!-- Mint -->
+    <div class="card">
+      <h2>Mint Stablecoins</h2>
+
+      <label for="collateral">Collateral (ADA)</label>
+      <input id="collateral" type="number" placeholder="e.g. 150" />
+
+      <label for="debt">Stablecoins to Mint</label>
+      <input id="debt" type="number" placeholder="e.g. 100" />
+
+      <button id="mint">✨ Mint Stablecoins</button>
+
+      <p>Minimum collateral ratio: <strong>150%</strong></p>
+    </div>
+
+    <!-- Vault Actions -->
+    <div class="card">
+      <h2>Vault Actions</h2>
+      <div class="grid-2">
+        <button id="list" class="secondary">📋 List My Vaults</button>
+        <button id="repay" class="danger">🔥 Repay & Close Vault</button>
+      </div>
+    </div>
+
+    <!-- Log -->
+    <div class="card">
+      <h2>Protocol Log</h2>
+      <div id="log" class="log"></div>
+      <button id="clear" style="margin-top:12px">Clear Log</button>
+    </div>
+
+    <div class="footer-note">
+      Built on Cardano • Testnet (Preprod)
+    </div>
+
+  </div>
+
+  <!-- Your existing JS -->
+  <script type="module" src="./stablecoin.js"></script>
+
+</body>
+</html>
