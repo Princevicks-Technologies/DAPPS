@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Cardano Voting dApp</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<style>
+body {
+  margin: 0;
+  font-family: Inter, system-ui, sans-serif;
+  background: #0b1020;
+  color: #e8ebff;
+}
+
+header {
+  padding: 20px 30px;
+  background: #131a33;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.primary { background: #4f7cff; color: white; }
+.warn { background: #ffb020; }
+.danger { background: #ff5c7c; }
+
+.container {
+  padding: 30px;
+  max-width: 900px;
+  margin: auto;
+}
+
+.panel {
+  background: #131a33;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+input {
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+  width: 100%;
+  margin-top: 6px;
+}
+
+label {
+  display: block;
+  margin-top: 12px;
+}
+
+#log {
+  margin-top: 10px;
+  color: #9aa3c7;
+  font-size: 0.9rem;
+  white-space: pre-wrap;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h2>🗳️ Decentralized Voting (Plutus V2)</h2>
+  <button id="connectWalletBtn" class="primary">Connect Wallet</button>
+</header>
+
+<div class="container">
+
+  <div class="panel">
+    <h3>Create Session</h3>
+    <label>
+      Options (comma separated)
+      <input id="options" placeholder="Yes,No,Abstain">
+    </label>
+    <label>
+      Start Time (POSIX)
+      <input id="startTime" placeholder="1700000000">
+    </label>
+    <label>
+      End Time (POSIX)
+      <input id="endTime" placeholder="1700003600">
+    </label>
+    <button class="primary" id="createSessionBtn">Create Session</button>
+  </div>
+
+  <div class="panel">
+    <h3>Voter Actions</h3>
+    <button class="primary" id="registerBtn">Register Voter</button>
+  </div>
+
+  <div class="panel">
+    <h3>Admin Actions</h3>
+    <label>
+      Voter PKH
+      <input id="voterPkh" placeholder="hex pubkey hash">
+    </label>
+    <button class="warn" id="approveBtn">Approve Voter</button>
+    <button class="danger" id="rejectBtn">Reject Voter</button>
+  </div>
+
+  <div class="panel">
+    <h3>Cast Vote</h3>
+    <label>
+      Choice Index(es)
+      <input id="choices" placeholder="0 or 0,1">
+    </label>
+    <button class="primary" id="voteBtn">Cast Vote</button>
+  </div>
+
+  <div class="panel">
+    <h3>Finalize</h3>
+    <button class="warn" id="closeBtn">Close Voting</button>
+    <button class="primary" id="tallyBtn">Tally Votes</button>
+  </div>
+
+  <div id="log">Not connected.</div>
+
+</div>
+
+<script type="module" src="offchain.js"></script>
+
+</body>
+</html>
